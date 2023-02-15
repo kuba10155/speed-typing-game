@@ -2,7 +2,15 @@ import React from "react"
 import useHook from "/src/useHook"
 
 export default function App() {
-  const {text, timeRemaining, isTimeRunning, wordCount, handleChange, startGame, inputRef} = useHook(15)
+  const {
+    text,
+    timeRemaining,
+    isTimeRunning,
+    wordCount,
+    handleChange,
+    startGame,
+    inputRef
+  } = useHook(15)
 
   return (
     <div>
