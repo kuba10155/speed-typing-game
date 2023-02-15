@@ -1,7 +1,7 @@
 import React from "react"
 
 export default function App() {
-
+  const {text, timeRemaining, isTimeRunning, wordCount, handleChange, startGame, textBoxRef} = useHook()
   const STARTING_TIME = 5
 
   const [text, setText] = React.useState("")
