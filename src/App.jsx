@@ -1,7 +1,7 @@
 import React from "react"
 
 export default function App() {
-  const {text, timeRemaining, isTimeRunning, wordCount, handleChange, startGame, textBoxRef} = useHook()
+  const {text, timeRemaining, isTimeRunning, wordCount, handleChange, startGame, inputRef} = useHook()
 
   return (
     <div>

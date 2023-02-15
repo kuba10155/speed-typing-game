@@ -3,13 +3,11 @@ import {useState, useEffect, useRef} from "react"
 function useHook() {
 
   const STARTING_TIME = 5
-
+  const inputRef = React.useRef(null)
   const [text, setText] = React.useState("")
   const [timeRemaining, setTimeRemaining] = React.useState(STARTING_TIME)
   const [isTimeRunning, setIsTimeRunning] = React.useState(false)
   const [wordCount, setWordCount] = React.useState(0)
-
-  const inputRef = React.useRef(null)
 
   function handleChange(event) {
     setText(event.target.value)
@@ -26,7 +24,7 @@ function useHook() {
   }, [timeRemaining, isTimeRunning])
 
   function calculateWords(text) {
-    const wordsArr = text.trim().split(" ") // trim usuwa białe spacje przed i za słowem
+    const wordsArr = text.trim().split(" ")
     return wordsArr.filter(word => word !== "").length
   }
 
@@ -44,7 +42,7 @@ function useHook() {
     setWordCount(calculateWords(text))
   }
 
-  return const {text, timeRemaining, isTimeRunning, wordCount, handleChange, startGame, textBoxRef}
+  return const {text, timeRemaining, isTimeRunning, wordCount, handleChange, startGame, inputRef}
 }
 
 export default useHook
