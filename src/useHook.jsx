@@ -1,6 +1,6 @@
 import {useState, useEffect, useRef} from "react"
 
-function useHook() {
+export default function useHook() {
 
   const STARTING_TIME = 5
   const inputRef = React.useRef(null)
@@ -44,5 +44,3 @@ function useHook() {
 
   return const {text, timeRemaining, isTimeRunning, wordCount, handleChange, startGame, inputRef}
 }
-
-export default useHook
