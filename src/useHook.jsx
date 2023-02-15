@@ -42,5 +42,5 @@ export default function useHook() {
     setWordCount(calculateWords(text))
   }
 
-  return const {text, timeRemaining, isTimeRunning, wordCount, handleChange, startGame, inputRef}
+  return {text, timeRemaining, isTimeRunning, wordCount, handleChange, startGame, inputRef}
 }
