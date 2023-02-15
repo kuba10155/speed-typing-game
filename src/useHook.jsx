@@ -1,11 +1,10 @@
 import {useState, useEffect, useRef} from "react"
 
-export default function useHook() {
+export default function useHook(startingTime = 10) {
 
-  const STARTING_TIME = 5
   const inputRef = React.useRef(null)
   const [text, setText] = React.useState("")
-  const [timeRemaining, setTimeRemaining] = React.useState(STARTING_TIME)
+  const [timeRemaining, setTimeRemaining] = React.useState(startingTime)
   const [isTimeRunning, setIsTimeRunning] = React.useState(false)
   const [wordCount, setWordCount] = React.useState(0)
 
@@ -30,7 +29,7 @@ export default function useHook() {
 
   function startGame() {
     setText("")
-    setTimeRemaining(STARTING_TIME)
+    setTimeRemaining(startingTime)
     setIsTimeRunning(true)
     setWordCount(0)
     inputRef.current.disabled = false
