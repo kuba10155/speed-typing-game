@@ -1,5 +1,5 @@
-import React from "react"
-import useHook from "/src/useHook"
+import React from "react";
+import useHook from "/src/useHook";
 
 export default function App() {
   const {
@@ -9,16 +9,24 @@ export default function App() {
     wordCount,
     handleChange,
     startGame,
-    inputRef
-  } = useHook(15)
+    inputRef,
+  } = useHook(15);
 
   return (
     <div>
       <h1>Speed Typing Game</h1>
-      <textarea ref={inputRef} disabled={!isTimeRunning} value={text} placeholder="Type here..." onChange={handleChange}/>
+      <textarea
+        ref={inputRef}
+        disabled={!isTimeRunning}
+        value={text}
+        placeholder="Type here..."
+        onChange={handleChange}
+      />
       <h4>Time remaining: {timeRemaining}</h4>
-      <button disabled={isTimeRunning} onClick={startGame}>Start</button>
+      <button disabled={isTimeRunning} onClick={startGame}>
+        Start
+      </button>
       <h1>Word count: {wordCount}</h1>
     </div>
-  )
+  );
 }

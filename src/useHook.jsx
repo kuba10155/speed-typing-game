@@ -1,45 +1,58 @@
-import React, {useState, useEffect, useRef} from "react"
+import React, { useState, useEffect, useRef } from "react";
 
-export default function useHook(startingTime = 10) {
+const STARTING_TIME = 10;
 
-  const inputRef = React.useRef(null)
-  const [text, setText] = React.useState("")
-  const [timeRemaining, setTimeRemaining] = React.useState(startingTime)
-  const [isTimeRunning, setIsTimeRunning] = React.useState(false)
-  const [wordCount, setWordCount] = React.useState(0)
+const useHook = (startingTime = STARTING_TIME) => {
+  const inputRef = useRef(null);
+  const [text, setText] = useState("");
+  const [timeRemaining, setTimeRemaining] = useState(startingTime);
+  const [isTimeRunning, setIsTimeRunning] = useState(false);
+  const [wordCount, setWordCount] = useState(0);
 
-  function handleChange(event) {
-    setText(event.target.value)
-  }
+  const handleChange = (event) => {
+    setText(event.target.value);
+  };
 
-  React.useEffect(() => {
-    if(isTimeRunning && timeRemaining > 0) {
-      setTimeout(() => {
-          setTimeRemaining(prevTime => prevTime - 1)
-      }, 1000)
-    } else if(timeRemaining === 0 ) {
-        endGame()
+  const calculateWords = (text) => {
+    const wordsArr = text.trim().split(/\s+/); // trim deletes whitespaces before and after
+    return wordsArr.filter((word) => word !== "").length;
+  };
+
+  const startGame = () => {
+    setText("");
+    setTimeRemaining(startingTime);
+    setIsTimeRunning(true);
+    setWordCount(0);
+    inputRef.current.disabled = false;
+    inputRef.current.focus();
+  };
+
+  const endGame = () => {
+    setIsTimeRunning(false);
+    setWordCount(calculateWords(text));
+  };
+
+  useEffect(() => {
+    if (isTimeRunning && timeRemaining > 0) {
+      const timer = setTimeout(() => {
+        setTimeRemaining((prevTime) => prevTime - 1);
+      }, 1000);
+
+      return () => clearTimeout(timer);
+    } else if (timeRemaining === 0) {
+      endGame();
     }
-  }, [timeRemaining, isTimeRunning])
+  }, [timeRemaining, isTimeRunning]);
 
-  function calculateWords(text) {
-    const wordsArr = text.trim().split(" ")
-    return wordsArr.filter(word => word !== "").length
-  }
+  return {
+    text,
+    timeRemaining,
+    isTimeRunning,
+    wordCount,
+    handleChange,
+    startGame,
+    inputRef,
+  };
+};
 
-  function startGame() {
-    setText("")
-    setTimeRemaining(startingTime)
-    setIsTimeRunning(true)
-    setWordCount(0)
-    inputRef.current.disabled = false
-    inputRef.current.focus()
-  }
-
-  function endGame() {
-    setIsTimeRunning(false)
-    setWordCount(calculateWords(text))
-  }
-
-  return {text, timeRemaining, isTimeRunning, wordCount, handleChange, startGame, inputRef}
-}
+export default useHook;
